@@ -1,6 +1,6 @@
 import static org.junit.Assert.assertEquals;
-// import static org.junit.Assert.assertTrue;
-// import static org.junit.Assert.assertFalse;
+// import static org.junit.Assert.assertTrue; commented out unused import
+// import static org.junit.Assert.assertFalse; commented out unused import
 import org.junit.Test;
 
 public class Test_DroneDeliveryApp {
