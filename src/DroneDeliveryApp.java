@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class DroneDeliveryApp {
 
     /**
@@ -12,15 +11,15 @@ public class DroneDeliveryApp {
      */
     public static double calculateBatteryDrain(double weight, double distance) {
         // set weight to be Math.max() with the arguments 0 and weight, so there can't be negative weight
-
+        weight = Math.max(0, weight);
         // use absolute value on the distance to ensure that it's a positive value
-
+        distance = Math.abs(distance);
         // calculate the weightFactor which is weight to the power of 1.5
-
+        double weightFactor = Math.pow(weight, 1.5);
         // calculate the battery loss by doing distance times weight factor times 0.05
-
+        double batteryLoss = distance * weightFactor * 0.05;
         // return the result
-        return -1;
+        return batteryLoss;
     }
 
     /**
@@ -35,24 +34,27 @@ public class DroneDeliveryApp {
      */
     public static double estimateDeliveryTime(double x1, double y1, double x2, double y2, double speed) {
         // set speed to be Math.max() with the arguments 0 and speed, so there can't be negative speed
-
+        speed = Math.max(0, speed);
         // diffence in x location is the absolute value of x1 minus x2
-
+        double diffX = Math.abs(x1 - x2);
         // diffence in y location is the absolute value of y1 minus y2
+        double diffY = Math.abs(y1 - y2);
 
         // Use the Pythagorean theorem (a^2 + b^2 = c^2) to find the distance
         // distance is the square root of (difference in x to the 2nd power) plus (difference in y
         // to the 2nd power)
-
+        double distance = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
         // if speed is zero, return 0 to prevent division by zero errors
         // if (speed == 0){
         //      return 0;
         // }
-
+        if (speed < 0.01){
+            return 0;
+        }
         // the time is the distance divided by the speed
-
+        double time = distance / speed;
         // return the result
-        return -1;
+        return time;
     }
 
     /**
@@ -68,22 +70,24 @@ public class DroneDeliveryApp {
     public static double getSignalStrength(double droneX, double droneY, double hubX, double hubY,
             double initialPower) {
         // diffence in x location is the absolute value of droneX minus hubX
-
+        droneX = Math.abs(droneX - hubX);
         // diffence in y location is the absolute value of drone y minus hub y
-
+        droneY = Math.abs(droneY - hubY);
         // Use the Pythagorean theorem (a^2 + b^2 = c^2) to find the distance
         // distance is the square root of (diff in x to the 2nd power) plus (diff in y
         // to the 2nd power)
-
+        double distance = Math.sqrt(Math.pow(droneX, 2) + Math.pow(droneY, 2));
         // if distance is near zero, return initialPower to prevent division by zero errors
         // if (distance < 0.01){
         //      return initialPower;
         // }
-
+        if (distance < 0.01){
+            return initialPower;
+        }
         // power is the initial power divided by (distance to the 2nd power)
-
+        double power = initialPower / Math.pow(distance, 2);
         // return the result
-        return -1;
+        return power;
     }
 
     /**
@@ -99,13 +103,13 @@ public class DroneDeliveryApp {
      */
     public static double calculateImpactVelocity(double elevation, double windSpeed) {
         // Calculate the wind factor by squaring the wind speed
-
+        double windFactor = Math.pow(windSpeed, 2);
         // Use absolute value to ensure elevation is treated as a positive distance
-
+        elevation = Math.abs(elevation);
         // impact velocity is the square root of (wind factor plus absolute elevation)
-
+        double impactVelocity = Math.sqrt(windFactor + elevation);
         // return the result
-        return -1;
+        return impactVelocity;
     }
 
     public static void main(String[] args) {
